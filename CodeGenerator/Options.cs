@@ -1,9 +1,7 @@
 using System;
-using CommandLine;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
-using CommandLine.Text;
 using System.Reflection;
 
 namespace SilentOrbit.ProtocolBuffers
@@ -37,7 +35,7 @@ namespace SilentOrbit.ProtocolBuffers
         [Option('t', "use-tabs", HelpText = "If set generated code will use tabs rather than 4 spaces.")]
         public bool UseTabs { get; set; }
 
-        [Value(0, Required = true)]
+        [Option(Required = true)]
         public IEnumerable<string> InputProto { get; set; }
 
         /// <summary>
