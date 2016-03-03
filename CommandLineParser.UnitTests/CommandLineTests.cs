@@ -39,7 +39,7 @@ namespace CommandLineParser.UnitTests
 
             AssertResults(options, expectedArguments);
         }
-        
+
         [TestCase("Input.bin Out.bin -vlength=150", "InputFile", "OutputFile", "MaximumLength", "Verbose")]
         public void Parser_WhenParsingIndexedOptions_ParsesArgumentsCorrectly(string input, params string[] expectedArguments)
         {
@@ -55,13 +55,13 @@ namespace CommandLineParser.UnitTests
         [TestCase("-o=Out.bin -i=Input.bin -vlength=150")]
         public void Parser_WhenParsingInvalidIndexedOptions_ThrowsException(string input)
         {
-            Assert.Throws<ArgumentException>(()=>ParseArguments<TestIndexedOptions>(input));
+            Assert.Throws<ArgumentException>(() => ParseArguments<TestIndexedOptions>(input));
         }
 
         private T ParseArguments<T>(string input) where T : class, new()
         {
-            Parser.Parser parser = new Parser.Parser();
-            T options = parser.Parse<T>(input);
+            var parser = new Parser<T>();
+            T options = parser.Parse(input);
 
             return options;
         }
@@ -74,13 +74,13 @@ namespace CommandLineParser.UnitTests
 
                 if (value.GetType().IsNumeric())
                 {
-                     Assert.GreaterOrEqual((int)value, 0);   
+                    Assert.GreaterOrEqual((int)value, 0);
                 }
                 else if (value.GetType().IsBoolean())
                 {
                     Assert.IsTrue((bool)value);
                 }
-                else 
+                else
                 {
                     Assert.NotNull(value);
                 }

@@ -102,8 +102,8 @@ namespace SilentOrbit.ProtocolBuffers
         
         public static Options Parse(string[] args)
         {
-            var parser = new Parser();
-            var options = parser.Parse<Options>(args);
+            var parser = new Parser<Options>();
+            var options = parser.Parse(args);
             
             if (args == null || args.Length == 0 || options.ShowHelp)
             {

@@ -42,8 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attribute\OptionAttribute.cs" />
+    <Compile Include="Parser\ArgumentParser.cs" />
     <Compile Include="Parser\Parser.cs" />
     <Compile Include="Parser\ParseRule.cs" />
+    <Compile Include="Parser\ParseState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\ReflectionExtensions.cs" />
   </ItemGroup>

@@ -17,5 +17,21 @@ namespace CommandLineParser.Attribute
             LongName = longName;
             Index = -1;
         }
+
+        public override string ToString()
+        {
+            string t = "";
+            if (Required)
+                t += "(Required)";
+            if (ShortName != null)
+                t += "Short: " + ShortName + " ";
+            if (LongName != null)
+                t += "Long: " + LongName + " ";
+            if (Index >= 0)
+                t += "Index: " + Index + " ";
+            if (HelpText != null)
+                t += "\n" + HelpText;
+            return t;
+        }
     }
 }

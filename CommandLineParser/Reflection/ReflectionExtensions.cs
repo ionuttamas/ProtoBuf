@@ -7,11 +7,11 @@ namespace CommandLineParser.Reflection
 {
     public static class ReflectionExtensions
     {
-        public static Dictionary<PropertyInfo, TAttr> GetAttributes<T, TAttr>() where TAttr : class 
+        public static Dictionary<PropertyInfo, TAttr> GetAttributes<T, TAttr>() where TAttr : class
         {
             Dictionary<PropertyInfo, TAttr> propertiesAttributes = new Dictionary<PropertyInfo, TAttr>();
-            Type classType = typeof (T);
-            Type attributeType = typeof (TAttr);
+            Type classType = typeof(T);
+            Type attributeType = typeof(TAttr);
             PropertyInfo[] properties = classType.GetProperties();
 
             foreach (PropertyInfo property in properties)
@@ -20,9 +20,9 @@ namespace CommandLineParser.Reflection
                     .GetCustomAttributes(attributeType, true)
                     .FirstOrDefault();
 
-                if (attribute==null)
+                if (attribute == null)
                     continue;
-                
+
                 propertiesAttributes[property] = attribute as TAttr;
             }
 
@@ -40,10 +40,10 @@ namespace CommandLineParser.Reflection
             Type type = instance.GetType();
             PropertyInfo property = type.GetProperty(name, BindingFlags.Public | BindingFlags.Instance);
 
-            if(property==null)
+            if (property == null)
                 throw new InvalidOperationException(string.Format("Type {0} does not have a property {1}", type, name));
 
-            property.SetValue(instance, value, null);   
+            property.SetValue(instance, value, null);
         }
 
         public static object GetProperty(this object instance, string name)
@@ -64,7 +64,7 @@ namespace CommandLineParser.Reflection
 
             return result;
         }
-        
+
         public static bool IsNumeric(this Type type)
         {
             if (type == typeof(byte?) ||
@@ -95,13 +95,7 @@ namespace CommandLineParser.Reflection
 
         public static bool IsString(this Type type)
         {
-            switch (Type.GetTypeCode(type))
-            {
-                case TypeCode.String:
-                    return true;
-                default:
-                    return false;
-            }
+            return Type.GetTypeCode(type) == TypeCode.String;
         }
 
         public static bool IsBoolean(this Type type)
@@ -109,13 +103,7 @@ namespace CommandLineParser.Reflection
             if (type == typeof(bool?))
                 return true;
 
-            switch (Type.GetTypeCode(type))
-            {
-                case TypeCode.Boolean:
-                    return true;
-                default:
-                    return false;
-            }
+            return Type.GetTypeCode(type) == TypeCode.Boolean;
         }
     }
 }
